@@ -111,7 +111,11 @@ class Matrix:
     def is_vector(self) -> bool:
         """Returns whether or not Matrix is a vector. (rows == 1 or cols == 1)"""
         return (self.rows == 1 or self.cols == 1)
-
+    
+    @property
+    def is_symmetric(self) -> bool:
+        """Returns whether or not a Matrix is symetric (A == A.T)"""
+        return self == self.T
 
     # --------------------------------
     # Static Methods
@@ -128,6 +132,9 @@ class Matrix:
             distribution (str): 'uniform' or 'normal'.
             **kwargs: parameters for distribution (low, high for uniform; loc, scale for normal).
         """
+        if not HAS_NUMPY:
+            raise ImportError("Must have Numpy imported to run random.")
+
         if distribution == "uniform":
             low = kwargs.get('low', 0.0)
             high = kwargs.get('high', 1.0)
@@ -345,9 +352,30 @@ class Matrix:
         result._obj = self._obj.mean(axis)
         return result
 
+    def variance(self, axis: int) -> Matrix:
+        """
+        Find variance all the elements for the desired axis returning a 1 x n or n x 1 Matrix.
+
+        Args:
+            axis (int): Determines Which axis to find variance along (0 for Row, 1 for Col)
+
+        Raises:
+            TypeError is axis is not an int between 0,1.
+
+        Returns:
+            Matrix
+        """
+        if axis != 0 and axis != 1:
+            raise TypeError("Axis must be 0 or 1")
+        
+        result = Matrix(1, self.cols) if axis == 0 else Matrix(self.rows, 1)
+        result._obj = self._obj.variance(axis)
+        return result
+
+
     def std(self, axis: int) -> Matrix:
         """
-        Find stanrd deviation all the elements for the desired axis returning a 1 x n or n x 1 Matrix.
+        Find standard deviation all the elements for the desired axis returning a 1 x n or n x 1 Matrix.
 
         Args:
             axis (int): Determines Which axis to find std along (0 for Row, 1 for Col)
