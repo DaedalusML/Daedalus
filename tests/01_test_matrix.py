@@ -548,6 +548,11 @@ class TestDunderAccess:
         assert a[0, 0] == 2.12978
         assert a[1, 0] == 2.14056
 
+    def test_contains(self):
+        m = Matrix([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+        assert 2 in m
+        assert not (11 in m)
+
 # ===========================================================================
 # 6. Test Decomposition Methods
 # ===========================================================================

@@ -1,5 +1,3 @@
-solve(b) Ax = b - A.inverse() * b
-
 rank() 
 
 get_col()

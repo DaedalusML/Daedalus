@@ -558,6 +558,9 @@ class Matrix:
         result = Matrix(self.rows, self.cols)
         result._obj = self._obj.round(places)
         return result
+    
+    def __contains__(self, value: int | float):
+        return self._obj.contains(value)
 
     # --- Basic Dunder Mathematical Operations ---
 

@@ -520,6 +520,17 @@ public:
     }
 
     /**
+     * @brief Returns whether or not said item exists in the Matrix.
+     * @returns True if value exists in Matrix, otherwise False.
+     */
+    bool contains(const T value) {
+        for (int i = 0; i < data.size(); ++i) {
+            if (data[i] == value) return true;
+        }
+        return false;
+    }
+
+    /**
      * @brief Takes the noramlization of the Matrix.
      * @param type The string of the type of normalization.
      * @return The norm of the Matrix
