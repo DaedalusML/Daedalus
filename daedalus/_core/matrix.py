@@ -478,6 +478,24 @@ class Matrix:
         res._obj = self._obj.get_col(idx)
         return res
     
+    def set_col(self, idx: int, new_col: list[int]) -> None:
+        """
+        Sets the col at the current index to the new_listed column.
+
+        Args:
+            idx (int): The index to overwrite the current col with.
+            new_col(list[int]) The new col.
+
+        Raises:
+            ValueError: When idx > self.cols - 1 and when len(new_col) != self.rows
+        """
+        if idx > self.cols - 1:
+            raise ValueError("Index must be lower than self.rows")
+        if len(new_col) != self.rows:
+            raise ValueError("len(new_col) must match self.rows")
+
+        self._obj.set_col(idx, new_col)
+
     def set(self, r: int, c: int, val: float) -> None:
         """Explicit setter used by tests."""
         self._obj.set(r, c, val)
