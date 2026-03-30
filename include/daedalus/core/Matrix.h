@@ -243,6 +243,16 @@ public:
         return col_matrix;
     }
 
+    /**
+     * @brief Sets the col at the desired index.
+     * @param idx The index to add the row to.
+     * @param new_row The new row to insert.
+     */
+    void set_row(int idx, std::vector<T> new_row) {
+        int start_pos = idx * num_cols;
+        std::copy(new_row.begin(), new_row.end(), data.begin() + start_pos);
+    }
+
     /** @brief Creates a deepcopy of the matrix */
     Matrix copy() const {
         Matrix result(num_rows, num_cols);

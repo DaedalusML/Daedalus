@@ -465,7 +465,7 @@ class Matrix:
         Raises:
             ValueError: When idx > self.rows and when len(new_row) != self.cols
         """
-        if idx > self.rows:
+        if idx > self.rows - 1:
             raise ValueError("Index must be lower than self.rows")
         if len(new_row) != self.cols:
             raise ValueError("len(new_row) must match self.cols")
