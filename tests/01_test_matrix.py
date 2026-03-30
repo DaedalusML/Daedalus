@@ -172,6 +172,21 @@ class TestProperties:
         b = Matrix([[1, 2], [1, 2]])
         assert b.is_symmetric == False
 
+    def test_is_orthogonal(self):
+        a = Matrix([[1, 0], [0, 1]])
+        assert a.is_orthogonal
+
+        b = Matrix([[1, 2], [3, 4]])
+        assert not b.is_orthogonal
+
+    def test_is_invertible(self):
+        a = Matrix([[1, 0], [0, 1]])
+        assert a.is_invertible
+
+        b = Matrix([[1, 1], [4, 4]])
+        assert not b.is_invertible
+
+
 # ===========================================================================
 # 3. Static Methods
 # ===========================================================================

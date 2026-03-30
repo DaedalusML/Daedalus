@@ -116,6 +116,16 @@ class Matrix:
     def is_symmetric(self) -> bool:
         """Returns whether or not a Matrix is symetric (A == A.T)"""
         return self == self.T
+    
+    @property
+    def is_orthogonal(self) -> bool:
+        """Returns whether or not a Matrix is orthogonal (A * A.T == I)"""
+        return (self * self.T) == Matrix.Identity(self.rows)
+
+    @property
+    def is_invertible(self) -> bool:
+        """Returns whether or not a Matrix is invertible (abs(det()) > 1e-12)"""
+        return abs(self.det()) > 1e-12
 
     # --------------------------------
     # Static Methods
