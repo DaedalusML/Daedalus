@@ -216,6 +216,16 @@ public:
     }
 
     /**
+     * @brief Sets the row at the desired index.
+     * @param idx The index to add the row to.
+     * @param new_row The new row to insert.
+     */
+    void set_row(int idx, std::vector<T> new_row) {
+        int start_pos = idx * num_cols;
+        std::copy(new_row.begin(), new_row.end(), data.begin() + start_pos);
+    }
+
+    /**
      * @brief Extracts a single col from the matrix.
      * @param idx The index of the col to extract (0-indexed).
      * @return Matrix<T> A new matrix of shape (rows, 1).
