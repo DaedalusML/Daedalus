@@ -466,6 +466,11 @@ class TestInstanceMethods:
         c.set(0, 0, 999.0)
         assert m(0, 0) == pytest.approx(1.0)  # original unchanged
 
+    def test_solve(self):
+        A = Matrix([[-1, -11, -3], [1, 1, 0], [2, 5, 1]])
+        b = Matrix([-37, -1, 10])
+        x = A.solve(b)
+        assert round(x[0, 0], 1) == -3.0 and round(x[1, 0], 1) == 2.0 and round(x[2, 0], 1) == 6.0
 
 # ===========================================================================
 # 5. Dunder — element access

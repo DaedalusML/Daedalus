@@ -463,6 +463,25 @@ class Matrix:
         res = Matrix(0, 0)
         res._obj = self._obj.copy()
         return res
+    
+    def solve(self, b: Matrix) -> Matrix:
+        """
+        Solves for x in the equation. Ax = b. by doing
+        x = A.inverse() * b
+
+        Args:
+            b (Matrix): The output Matrix.
+
+        Raises:
+            ValueError: If the current Matrix is not invertible.
+        
+        Returns:
+            The X Matrix.
+        """
+        if not self.is_invertible:
+            raise ValueError("The Current Matrix is not invertible.")
+
+        return self.inverse() * b
 
     # -------------------------------- 
     # Decomposition Methods 
