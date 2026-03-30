@@ -602,6 +602,9 @@ class Matrix:
         """Matrix multiplication or scalar multiplication."""
         res = Matrix(0, 0)
         if isinstance(other, Matrix):
+            if self.cols != other.rows:
+                raise ValueError("Matrix Rows must equal other Matrixs cols.")
+            
             if self.rows >= 1024 and other.cols >= 1024:
                 res._obj = self._obj.multiply_tiled(other._obj)
             else:
