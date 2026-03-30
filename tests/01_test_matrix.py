@@ -480,6 +480,14 @@ class TestInstanceMethods:
         x = A.solve(b)
         assert round(x[0, 0], 1) == -3.0 and round(x[1, 0], 1) == 2.0 and round(x[2, 0], 1) == 6.0
 
+    def test_argmax(self):
+        m = Matrix([[1.0, 2.0, 3.0], [4.0, 5.0, 6.0], [1.0, 5.0, 4.0]])
+        assert m.argmax() == (1, 2)
+
+    def test_argmin(self):
+        m = Matrix([[1.0, 2.0, 3.0], [-1.0, 5.0, 6.0], [1.0, 5.0, 4.0]])
+        assert m.argmin() == (1, 0)
+
 # ===========================================================================
 # 5. Dunder — element access
 # ===========================================================================

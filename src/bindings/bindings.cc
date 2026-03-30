@@ -176,6 +176,8 @@ PYBIND11_MODULE(daedalus_cpp, m) {
         .def("variance", &Matrix<double>::variance, py::arg("axis"))
         .def("standard_deviation", &Matrix<double>::standard_deviation, py::arg("axis"))
         .def("reshape", &Matrix<double>::reshape, py::arg("new_rows"), py::arg("new_cols"))
+        .def("argmax_global", &Matrix<double>::argmax_global)
+        .def("argmin_global", &Matrix<double>::argmin_global)
         .def("transpose", &Matrix<double>::transpose)
         .def("det", &Matrix<double>::det)
         .def("inverse", &Matrix<double>::inverse)

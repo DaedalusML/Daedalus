@@ -16,6 +16,8 @@
 #include <sstream>
 #include <functional>
 #include <cmath>
+#include <algorithm>
+#include <iterator>
 
 template <typename T>
 
@@ -224,7 +226,7 @@ public:
             throw std::out_of_range("Col index out of bounds");
         }
         Matrix<T> col_matrix(num_rows, 1);
-        for (int i = 0; i < num_rows; ++i) {
+        for (size_t i = 0; i < num_rows; ++i) {
             col_matrix(i, 0) = (*this)(i, idx);
         }
 
@@ -542,7 +544,7 @@ public:
      * @returns True if value exists in Matrix, otherwise False.
      */
     bool contains(const T value) {
-        for (int i = 0; i < data.size(); ++i) {
+        for (size_t i = 0; i < data.size(); ++i) {
             if (data[i] == value) return true;
         }
         return false;
@@ -736,6 +738,34 @@ public:
     Matrix reshape(int new_rows, int new_cols) {
         Matrix<T> result(new_rows, new_cols, this->data);
         return result;
+    }
+
+    /**
+     * @brief Finds the index of the maximum value.
+     * @return The index (row, col) of the maximum value.
+     */
+    std::tuple<int, int> argmax_global() {
+        auto max_it = std::max_element(data.begin(), data.end());
+        int max_index_1d = std::distance(data.begin(), max_it);
+        // Convert to 2D coordinates
+        int row = max_index_1d / num_cols;
+        int col = max_index_1d % num_cols;
+
+        return {static_cast<int>(row), static_cast<int>(col)};
+    }
+
+    /**
+    * @brief Finds the index of the minimum value.
+    * @return The index (row, col) of the minimum value.
+    */
+    std::tuple<int, int> argmin_global() {
+        auto min_it = std::min_element(data.begin(), data.end());
+        int min_index_1d = std::distance(data.begin(), min_it);
+        // Convert to 2D coordinates
+        int row = min_index_1d / num_cols;
+        int col = min_index_1d % num_cols;
+
+        return {static_cast<int>(row), static_cast<int>(col)};
     }
 
     /**

@@ -488,6 +488,24 @@ class Matrix:
             raise ValueError("The Current Matrix is not invertible.")
 
         return self.inverse() * b
+    
+    def argmax(self) -> tuple[int, int]:
+        """
+        Finds the global argmax of the Matrix.
+
+        Returns:
+            A tuple with the index of (rows, cols)
+        """
+        return self._obj.argmax_global()
+
+    def argmin(self) -> tuple[int, int]:
+        """
+        Finds the global argmin of the Matrix.
+
+        Returns:
+            A tuple with the index of (rows, cols)
+        """
+        return self._obj.argmin_global()
 
     # -------------------------------- 
     # Decomposition Methods 
