@@ -717,6 +717,18 @@ class TestArithmetic:
         c_np = np.array([[8, 8], [8, 8]])
         np.testing.assert_array_almost_equal(c.to_numpy(), c_np)
 
+    # --- Division ---
+
+    def test_true_division(self):
+        m = Matrix([1, 2])
+        m_2 = m / 2
+        assert m_2.rows == m.rows and m_2.cols == m.cols
+        assert m_2[0, 0] == 0.5 and m_2[1, 0] == 1
+
+        with pytest.raises(TypeError):
+            a = Matrix([1, 2])
+            m / a
+
     # --- Power ---
 
     def test_power(self):

@@ -171,7 +171,6 @@ cholesky(A):
     return L
     // Invariant: A == L * L^T
 
-__contains__
 __div__
 __array__
 

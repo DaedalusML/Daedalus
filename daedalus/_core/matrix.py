@@ -629,6 +629,13 @@ class Matrix:
     def __matmul__(self, other: Matrix | float) -> Matrix:
         return self.__mul__(other)
 
+    def __truediv__(self, other: float | int) -> Matrix:
+        if not (isinstance(other, float) or isinstance(other, int)):
+            raise TypeError("Div must be a scaler value.")
+        res = Matrix(self.rows, self.cols)
+        res._obj = self._obj / float(other)
+        return res
+
     def __pow__(self, power_value: int | float):
         self._obj = self._obj.power_to(power_value)
         return self
