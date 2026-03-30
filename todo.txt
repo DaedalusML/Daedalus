@@ -1,7 +1,5 @@
 rank() 
 
-get_col()
-
 set_row(idx, row_matrix)
 set_col(idx, col_matrix)
 
@@ -171,7 +169,6 @@ cholesky(A):
     return L
     // Invariant: A == L * L^T
 
-__div__
 __array__
 
 sqrt()

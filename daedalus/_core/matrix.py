@@ -450,8 +450,14 @@ class Matrix:
 
     def get_row(self, idx: int) -> Matrix:
         """Returns a specific row as a new Matrix."""
-        res = Matrix(0, 0)
+        res = Matrix(1, self.cols)
         res._obj = self._obj.get_row(idx)
+        return res
+    
+    def get_col(self, idx: int):
+        """Returns a specific col as a new Matrix."""
+        res = Matrix(1, self.cols)
+        res._obj = self._obj.get_col(idx)
         return res
     
     def set(self, r: int, c: int, val: float) -> None:

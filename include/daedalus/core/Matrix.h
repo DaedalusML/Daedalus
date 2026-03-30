@@ -213,6 +213,24 @@ public:
         return row_matrix;
     }
 
+    /**
+     * @brief Extracts a single col from the matrix.
+     * @param idx The index of the col to extract (0-indexed).
+     * @return Matrix<T> A new matrix of shape (rows, 1).
+     * @throws std::out_of_range If col index > than number of col.
+     */
+    Matrix<T> get_col(int idx) const {
+        if (idx < 0 || idx >= num_cols) {
+            throw std::out_of_range("Col index out of bounds");
+        }
+        Matrix<T> col_matrix(num_rows, 1);
+        for (int i = 0; i < num_rows; ++i) {
+            col_matrix(i, 0) = (*this)(i, idx);
+        }
+
+        return col_matrix;
+    }
+
     /** @brief Creates a deepcopy of the matrix */
     Matrix copy() const {
         Matrix result(num_rows, num_cols);

@@ -137,6 +137,7 @@ PYBIND11_MODULE(daedalus_cpp, m) {
             );
         })
         .def("get_row", &Matrix<double>::get_row, py::arg("idx"))
+        .def("get_col", &Matrix<double>::get_col, py::arg("idx"))
         .def("copy", &Matrix<double>::copy)
         .def("__call__", [](Matrix<double> &self, size_t r, size_t c) { return self(r, c); }, 
              py::arg("r"), py::arg("c"))
