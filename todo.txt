@@ -9,38 +9,6 @@ max(axis)
 argmin(axis)
 argmax(axis)
 
-FUNCTION QR_Decomposition(Matrix A):
-    SET m = A.rows
-    SET n = A.cols
-    
-    // Initialize Q with the same dimensions as A and R as an n x n zero matrix
-    DECLARE Q AS Matrix(m, n)
-    DECLARE R AS Matrix(n, n)
-
-    FOR j FROM 0 TO n-1:
-        // Start with the j-th column of A
-        DECLARE v AS Vector = A.get_col(j)
-        
-        FOR i FROM 0 TO j-1:
-            // Calculate the R coefficient: dot product of Q's i-th column and A's j-th column
-            R(i, j) = dot_product(Q.get_col(i), A.get_col(j))
-            
-            // Subtract the projection of v onto the previously found orthogonal vectors
-            v = v - (R(i, j) * Q.get_col(i))
-        
-        // Calculate the norm of the resulting orthogonal vector
-        R(j, j) = norm(v)
-        
-        // Check for linear dependency (if norm is near zero, the matrix is rank-deficient)
-        IF R(j, j) > tolerance:
-            // Normalize v to get the j-th orthonormal column of Q
-            Q.set_col(j, v / R(j, j))
-        ELSE:
-            // Handle linearly dependent column
-            Q.set_col(j, zero_vector)
-            
-    RETURN (Q, R)
-
 pinv() Moore-Penrose pseudoinverse - from svd() V * diag(1 / sigma) * U^T
 
 sqrt()
