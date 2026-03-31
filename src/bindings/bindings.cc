@@ -185,7 +185,7 @@ PYBIND11_MODULE(daedalus_cpp, m) {
         .def("transpose", &Matrix<double>::transpose)
         .def("det", &Matrix<double>::det)
         .def("inverse", &Matrix<double>::inverse)
-        .def("pinv", &Matrix<double>::pinv)
+        .def("pinv", &Matrix<double>::pinv, py::arg("tol"))
         .def("trace", &Matrix<double>::trace)
         .def("rank", &Matrix<double>::rank)
         .def("svd", [](const Matrix<double> &self) {

@@ -452,10 +452,19 @@ class Matrix:
         res._obj = self._obj.inverse()
         return res
 
-    def pinv(self) -> Matrix:
-        """Finds the Moore-Penrose Pseudoinverse A+ = (A.T * A)^-1 * A.T."""
+    def pinv(self, tol: float = 1e-12) -> Matrix:
+        """
+        Finds the Moore-Penrose Pseudoinverse by SVD.
+        A+ = V * diag(1 / sigma) * U.transpose()
+        
+        Args:
+            tol (float): The Tolerance level.
+
+        Returns:
+            A+ Matrix.
+        """
         res = Matrix(0, 0)
-        res._obj = self._obj.pinv()
+        res._obj = self._obj.pinv(tol)
         return res
 
     def get_row(self, idx: int) -> Matrix:
