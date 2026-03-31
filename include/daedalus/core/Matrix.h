@@ -983,6 +983,14 @@ public:
     }
 
     /**
+     * @brief Finds the Moore-Penrose Pseudoinverse.
+     * @returns The Pseudoinverse Matrix
+     */
+    Matrix pinv() {
+        return (this->transpose() * (*this)).inverse() * this->transpose();
+    }
+
+    /**
      * @brief Returs the trace of the Matrix. Sum of Diagonals.
      * @return the Trace of the Matrix
      */

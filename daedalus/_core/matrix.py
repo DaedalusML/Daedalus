@@ -452,6 +452,12 @@ class Matrix:
         res._obj = self._obj.inverse()
         return res
 
+    def pinv(self) -> Matrix:
+        """Finds the Moore-Penrose Pseudoinverse A+ = (A.T * A)^-1 * A.T."""
+        res = Matrix(0, 0)
+        res._obj = self._obj.pinv()
+        return res
+
     def get_row(self, idx: int) -> Matrix:
         """Returns a specific row as a new Matrix."""
         res = Matrix(1, self.cols)
