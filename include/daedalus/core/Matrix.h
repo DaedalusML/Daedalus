@@ -261,6 +261,24 @@ public:
         return result;
     }
 
+    /**
+     * @brief Vstacks stacks to Matrices vertically together. Assumes Col each other.
+     * @return newly Combined Matrix.
+     */
+    Matrix vstack(std::vector<Matrix<T>> others) {
+        std::vector<T> result_data = data;
+        int total_rows = num_rows;
+        for (Matrix<T> other : others) {
+            if (other.num_cols != num_cols)
+                throw std::invalid_argument("Other Matrices must match num_cols");
+
+            total_rows += other.num_rows;
+            result_data.insert(result_data.end(), other.data.begin(), other.data.end());
+        }
+        Matrix<T> result(total_rows, num_cols, result_data);
+        return result;
+    }
+
     /** @brief Multiples an entire row by a scalar constant. */
     void scale_row(size_t row_idx, T scalar) {
         if (row_idx >= num_rows) throw std::out_of_range("Row index out of bounds.");
