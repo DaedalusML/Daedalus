@@ -544,7 +544,7 @@ class Matrix:
             res._obj = self._obj.vstack(obj_others)
             return res
 
-        raise ValueError("others paramter is a Matrix or list[Matrix].")
+        raise ValueError("others parameter is a Matrix or list[Matrix].")
     
     def solve(self, b: Matrix) -> Matrix:
         """
