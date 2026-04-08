@@ -16,7 +16,6 @@ from unittest.mock import patch
 import pytest
 from daedalus import read_csv, DataFrame
 
-
 def test_read_csv():
     df: DataFrame = read_csv('tests/test.csv')
 
