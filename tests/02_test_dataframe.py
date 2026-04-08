@@ -132,6 +132,31 @@ class TestProperties:
 
 class TestMethods:
 
+    def test_at(self):
+        df = make_people_df()
+        assert df.at(0, "name") == "Alice"
+        assert df.at(1, "age") == 30
+
+        df = make_people_df()
+        # column 0 = "name", column 1 = "age", column 2 = "score"
+        assert df.at(0, 0) == "Alice"
+        assert df.at(2, 1) == 22
+
+        df = make_people_df()
+        assert df.at(2, "name") == "Charlie"
+        df = make_people_df()
+        assert df.at(0, "score") == pytest.approx(9.5)
+
+        df = make_people_df()
+        with pytest.raises(Exception):
+            df.at(99, "name")
+        df = make_people_df()
+        with pytest.raises(Exception):
+            df.at(0, "nonexistent")
+        df = make_people_df()
+        with pytest.raises(Exception):
+            df.at(0, 999)
+
     def test_head(self):
         df = DataFrame()
         df.add_column("v", list(range(10)))
@@ -157,6 +182,12 @@ class TestMethods:
         t = df.tail(1)
         assert t.at(0, "name") == "Charlie"
         assert t.at(0, "age") == 22
+
+    def test_get_column_names(self):
+        df = make_people_df()
+        col_names = df.get_column_names()
+        assert len(col_names) == 3
+        assert col_names == ["name", "age", "score"]
 
     def test_add_column(self):
         df = DataFrame()
@@ -196,31 +227,6 @@ class TestMethods:
         df = make_people_df()
         df.drop_column("score")
         assert df.columns == ["name", "age"]
-
-    def test_at(self):
-        df = make_people_df()
-        assert df.at(0, "name") == "Alice"
-        assert df.at(1, "age") == 30
-
-        df = make_people_df()
-        # column 0 = "name", column 1 = "age", column 2 = "score"
-        assert df.at(0, 0) == "Alice"
-        assert df.at(2, 1) == 22
-
-        df = make_people_df()
-        assert df.at(2, "name") == "Charlie"
-        df = make_people_df()
-        assert df.at(0, "score") == pytest.approx(9.5)
-
-        df = make_people_df()
-        with pytest.raises(Exception):
-            df.at(99, "name")
-        df = make_people_df()
-        with pytest.raises(Exception):
-            df.at(0, "nonexistent")
-        df = make_people_df()
-        with pytest.raises(Exception):
-            df.at(0, 999)
 
     def test_filter(self):
         df = make_people_df()
@@ -373,7 +379,7 @@ class TestDunders:
         result = df.filter("age", lambda x: False)
         assert bool(result) is False
 
-    def test_contains_existing_column(self):
+    def test_contains(self):
         df = make_people_df()
         assert "age" in df
         df = make_people_df()
@@ -402,7 +408,7 @@ class TestDunders:
         assert rows == []
 
 # ===========================================================================
-# 12. Integration / round-trip tests
+# 7. Integration / round-trip tests
 # ===========================================================================
 
 class TestIntegration:
